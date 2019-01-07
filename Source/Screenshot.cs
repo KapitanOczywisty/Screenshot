@@ -239,7 +239,6 @@ namespace Screenshot
                     // move to level
                     UILevelSelector.instance.SetCurrentLevel(k);
                     yield return null;
-
                     main.Render();
                     textures[k] = new Texture2D(tw, th, TextureFormat.RGB24, false);
                     RenderTexture.active = rt;
@@ -291,9 +290,9 @@ namespace Screenshot
             if (this.textMeshProUGUI == null)
             {
                 var gm = Game.current._money;
-                GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(gm.prefab_MoneyIndicatorLineItem);
-                gameObject.transform.SetParent(gm.txtMoneyIndicatorContainer.transform);
-                this.textMeshProUGUI = gameObject.GetComponent<TextMeshProUGUI>();
+                this.textMeshProGoUGUI = UnityEngine.Object.Instantiate<GameObject>(gm.prefab_MoneyIndicatorLineItem);
+                textMeshProGoUGUI.transform.SetParent(gm.txtMoneyIndicatorContainer.transform);
+                this.textMeshProUGUI = textMeshProGoUGUI.GetComponent<TextMeshProUGUI>();
             }
             textMeshProUGUI.fontStyle = FontStyles.Bold;
 
@@ -317,6 +316,7 @@ namespace Screenshot
             
         }
 
+        private GameObject textMeshProGoUGUI;
         private TextMeshProUGUI textMeshProUGUI;
 
         // helper function for fading out floating text
